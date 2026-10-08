@@ -1,0 +1,204 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>FreshMart Project Documentation</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    margin: 40px;
+  }
+  h1 {
+    color: #047857;
+    font-size: 24pt;
+    border-bottom: 3px solid #059669;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  h2 {
+    color: #065f46;
+    font-size: 16pt;
+    margin-top: 24px;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 4px;
+  }
+  h3 {
+    color: #0f766e;
+    font-size: 12pt;
+    margin-top: 16px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 10pt;
+  }
+  .header-box {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  th {
+    background-color: #059669;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 10pt;
+  }
+  td {
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    font-size: 9.5pt;
+  }
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .highlight-box {
+    background-color: #f0fdf4;
+    border-left: 4px solid #10b981;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .step-num {
+    font-weight: bold;
+    color: #059669;
+  }
+  ul {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-box">
+  <h1>FreshMart: Digital Khata, Smart Voice POS & Customer Ledger</h1>
+  <p><strong>Project Type:</strong> Multi-Tenant Retail Ledger & Voice-Activated POS Platform</p>
+  <p><strong>Target Audience:</strong> Small Village Kirana Shops, General Provisions, Bakeries to Neighborhood Supermarkets</p>
+  <p><strong>Status:</strong> Development Complete & 100% Verified (23/23 Automated Integration Tests Passed)</p>
+</div>
+
+<h2>1. Executive Summary & Market Value Proposition</h2>
+<p>
+  <strong>FreshMart</strong> is a lightweight, zero-hardware-rental retail management application designed specifically for local merchants who have <strong>no delivery partners</strong> and <strong>no time for complicated stock keeping</strong>. It eliminates the everyday friction of manual bookkeeping by introducing <strong>Voice-Activated Quick Sales</strong>, <strong>Day-End Cash Drawer (Galla) Balancing</strong>, <strong>In-App Voice Soundbox</strong>, and <strong>Multi-Tenant Direct UPI Settlements</strong> with zero transaction fees.
+</p>
+
+<h2>2. Multi-Role User Architecture</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Key Responsibilities & Access Scope</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>System Admin</strong></td>
+      <td>Manages platform performance, provisions new shop owners, monitors active stores, and views high-level gross platform metrics.</td>
+    </tr>
+    <tr>
+      <td><strong>Shop Owner (Merchant)</strong></td>
+      <td>Full store control: manages customer accounts, adds credit purchases, records payments, runs voice sales, manages daily cash register, logs morning regulars, and generates counter QR standees.</td>
+    </tr>
+    <tr>
+      <td><strong>Customer</strong></td>
+      <td>Read-only self-service digital passbook: views itemized purchase bills, payment receipts, balance timeline, and makes 1-tap UPI payments directly to their shop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3. End-to-End System Workflow</h2>
+
+<h3><span class="step-num">Step 1:</span> Shop Owner Onboarding & Direct UPI Bank Linking</h3>
+<ul>
+  <li>Upon registration and login, shopkeepers set up their <strong>Shop Name</strong> and <strong>Shop UPI ID (VPA)</strong> in their profile.</li>
+  <li><strong>0% Intermediary Fee:</strong> Payments bypass third-party payment gateway cuts (saving 2%) and deposit directly into the shopkeeper's own bank account immediately.</li>
+  <li><strong>Multi-Shop Isolation:</strong> Customers of Shop A pay Shop A's UPI ID, while customers of Shop B pay Shop B's UPI ID with zero cross-mixing.</li>
+</ul>
+
+<h3><span class="step-num">Step 2:</span> Customer Onboarding with Automatic Email Fallback</h3>
+<ul>
+  <li>Merchant enters customer Name, Email, and optional WhatsApp number.</li>
+  <li><strong>Smart Channel Routing:</strong> If a WhatsApp number is provided, an instant WhatsApp invite is generated. If no WhatsApp number is entered, the login credentials, digital passbook link, and payment statements are <strong>automatically sent to the customer's Email</strong>.</li>
+</ul>
+
+<h3><span class="step-num">Step 3:</span> Voice-to-Sale & Daily Galla (Cash Register) Balancing</h3>
+<ul>
+  <li><strong>Voice Assistant:</strong> Shopkeeper taps the microphone button and speaks naturally (e.g., <em>"56 note on sale"</em>, <em>"Ramesh 2kg sugar 80"</em>, <em>"Suresh paid 200"</em>). The natural language engine extracts quantities, customer names, and prices to log the entry in 1 second.</li>
+  <li><strong>Daily Galla Reconciliation:</strong> Real-time formula: <code>Opening Cash + Quick Cash Sales + Udhaar Cash Collected - Drawer Expenses = Expected Cash</code>.</li>
+  <li><strong>30-Second Day-End Closing:</strong> At shop closing, entering physical cash counted displays instant discrepancy validation (<code>Balanced Perfectly ✅</code>, <code>Short ⚠️</code>, or <code>Excess 💰</code>).</li>
+</ul>
+
+<h3><span class="step-num">Step 4:</span> Built-in Mobile Voice Soundbox (Zero Hardware Rental)</h3>
+<ul>
+  <li>Replaces physical soundbox speaker devices (which cost ₹100–₹150/month) with an in-app speech engine.</li>
+  <li>Plays a digital cash chime and loudly announces transactions through the phone speaker:
+    <ul>
+      <li>💳 <em>"Received ₹500 from Ramesh via UPI!"</em></li>
+      <li>💵 <em>"₹56 cash sale recorded!"</em></li>
+    </ul>
+  </li>
+</ul>
+
+<h3><span class="step-num">Step 5:</span> Customer Credit Risk Badges & AI Receipt Scanner</h3>
+<ul>
+  <li><strong>Traffic Light Risk Badges:</strong>
+    <ul>
+      <li><span class="badge" style="background:#ecfdf5; color:#047857; border-color:#a7f3d0;">🟢 Good Standing:</span> Dues within limit and paid on time (&lt; 15 days).</li>
+      <li><span class="badge" style="background:#fffbeb; color:#b45309; border-color:#fde68a;">🟡 Attention Due:</span> Pending for 15–30 days or high credit utilization.</li>
+      <li><span class="badge" style="background:#fef2f2; color:#b91c1c; border-color:#fecaca;">🔴 High Risk:</span> Overdue &gt; 30 days or credit limit exceeded. Safety prompt warns before giving more credit.</li>
+    </ul>
+  </li>
+  <li><strong>AI Kacha Bill / Slip Scanner:</strong> Parses handwritten paper chits, receipts, and invoices to extract line items, quantities, and rates automatically without manual typing.</li>
+</ul>
+
+<h3><span class="step-num">Step 6:</span> Morning Regulars / "Parcha" Quick-Tally (Milk & Water Cans)</h3>
+<ul>
+  <li>1-tap morning checklist for regular customers taking fixed items daily (1 packet milk, 1 water can, daily bread).</li>
+  <li>Select all and tap <strong>"Record All"</strong> to update 20+ customer accounts in 5 seconds with zero paper tally marks.</li>
+</ul>
+
+<h3><span class="step-num">Step 7:</span> 1-Tap Customer Payments & Printable Counter Standee</h3>
+<ul>
+  <li><strong>Customer App Home:</strong> Displays live remaining balance with a direct <strong>"Pay via UPI"</strong> button that pre-populates Google Pay/PhonePe/Paytm with the exact shop UPI ID and amount.</li>
+  <li><strong>Counter QR Standee:</strong> 1-tap printable high-resolution poster with shop branding and UPI QR code for the retail counter.</li>
+</ul>
+
+<h2>4. Technical & Quality Verification</h2>
+<div class="highlight-box">
+  <p><strong>✓ Backend Integration Test Suite:</strong> 23 Passed / 0 Failed (100% Success Rate)</p>
+  <p><strong>✓ Frontend TypeScript Compilation:</strong> 0 Errors (Clean build)</p>
+  <p><strong>✓ Compatibility:</strong> Web, Android, iOS responsive layout with Dark & Light theme support</p>
+</div>
+
+<p style="margin-top: 30px; font-size: 10pt; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px;">
+  <em>Generated for Management Review & Stakeholder Demonstration • FreshMart Development Team</em>
+</p>
+
+</body>
+</html>

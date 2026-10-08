@@ -1,0 +1,348 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>FreshMart - Project Proposal &amp; Technical Scope</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+  @page {
+    size: 8.5in 11in;
+    margin: 1.0in;
+  }
+  body {
+    font-family: 'Segoe UI', 'Calibri', Arial, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    font-size: 10.5pt;
+  }
+  .proposal-header {
+    border-bottom: 3px solid #059669;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+  .company-tagline {
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #059669;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  h1 {
+    color: #065f46;
+    font-size: 24pt;
+    margin: 0 0 6px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .subtitle {
+    color: #475569;
+    font-size: 13pt;
+    margin: 0 0 16px 0;
+    font-weight: 500;
+  }
+  .meta-grid {
+    width: 100%;
+    margin-top: 14px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .meta-grid td {
+    padding: 8px 14px;
+    font-size: 9.5pt;
+    border: none;
+    color: #334155;
+  }
+  .meta-grid strong {
+    color: #0f172a;
+  }
+  h2 {
+    color: #065f46;
+    font-size: 15pt;
+    margin-top: 32px;
+    margin-bottom: 10px;
+    border-bottom: 1.5px solid #10b981;
+    padding-bottom: 4px;
+  }
+  h3 {
+    color: #0f766e;
+    font-size: 12pt;
+    margin-top: 20px;
+    margin-bottom: 6px;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px 0;
+  }
+  table.data-table th {
+    background-color: #059669;
+    color: #ffffff;
+    text-align: left;
+    padding: 9px 12px;
+    font-size: 9.5pt;
+    font-weight: bold;
+    border: 1px solid #047857;
+  }
+  table.data-table td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    font-size: 9pt;
+    vertical-align: top;
+  }
+  table.data-table tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .callout-box {
+    background-color: #f0fdf4;
+    border-left: 4px solid #10b981;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout-box-blue {
+    background-color: #f0f9ff;
+    border-left: 4px solid #0284c7;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 8.5pt;
+    font-weight: bold;
+  }
+  .badge-green {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+  .badge-amber {
+    background-color: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+  }
+  .badge-red {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+  .sign-table {
+    width: 100%;
+    margin-top: 36px;
+    border-collapse: collapse;
+  }
+  .sign-table td {
+    border: 1px solid #cbd5e1;
+    padding: 14px;
+    font-size: 9.5pt;
+    vertical-align: top;
+    width: 50%;
+  }
+  .footer {
+    margin-top: 40px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<div class="proposal-header">
+  <div class="company-tagline">PROJECT PROPOSAL &amp; SCOPE OF WORK</div>
+  <h1>FreshMart: Digital Khata, Smart Voice POS &amp; Merchant Platform</h1>
+  <div class="subtitle">Next-Generation Retail Operating System for Local Merchants &amp; Supermarkets</div>
+  
+  <table class="meta-grid">
+    <tr>
+      <td><strong>Document Type:</strong> First-Level Project &amp; Technical Proposal</td>
+      <td><strong>Target Audience:</strong> Executive Management &amp; Stakeholders</td>
+    </tr>
+    <tr>
+      <td><strong>Document Version:</strong> 1.0 (Proposal Phase)</td>
+      <td><strong>Deployment Model:</strong> Multi-Tenant SaaS (Web, Android, iOS)</td>
+    </tr>
+  </table>
+</div>
+
+<h2>1. Executive Summary &amp; Project Vision</h2>
+<p>
+  <strong>FreshMart</strong> is a next-generation retail operating and customer credit (Udhaar) management platform engineered specifically for local neighborhood merchants, grocery shops, provision stores, bakeries, and local supermarkets.
+</p>
+<p>
+  Unlike traditional complex ERPs or basic ledger apps that suffer from high typing friction, cumbersome inventory maintenance, and expensive external hardware dependencies, FreshMart delivers a <strong>zero-hardware, voice-first, direct-settlement ecosystem</strong>. It empowers shopkeepers to record transactions in seconds, balance daily cash registers effortlessly, eliminate soundbox rental costs, and collect dues directly into their own bank accounts via dynamic UPI.
+</p>
+
+<h2>2. Problem Statement &amp; Market Opportunity</h2>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th style="width: 40%;">Existing Market Friction</th>
+      <th style="width: 60%;">FreshMart Solution &amp; Innovation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Manual Typing Overhead:</strong> Busy shopkeepers during rush hours cannot type item-by-item on a mobile keyboard.</td>
+      <td><strong>Voice-Activated Quick Sales &amp; OCR:</strong> Spoken input (e.g., <em>"56 note on sale"</em>, <em>"Ramesh 2kg sugar 80"</em>) and paper slip image extraction.</td>
+    </tr>
+    <tr>
+      <td><strong>Hardware Rental Fees:</strong> Payment companies charge merchants ₹100–₹150 every month for physical voice soundbox speakers.</td>
+      <td><strong>In-App Voice Soundbox:</strong> Built-in mobile speech engine announcing payments aloud for free via the merchant's smartphone.</td>
+    </tr>
+    <tr>
+      <td><strong>Gateway Fees &amp; Payout Delays:</strong> Traditional payment gateways deduct 2% transaction fees and hold funds in escrow.</td>
+      <td><strong>0% Direct Bank Settlement:</strong> Generates direct merchant UPI payment links and dynamic QR codes with immediate direct-to-bank credit.</td>
+    </tr>
+    <tr>
+      <td><strong>Daily Cash Drawer Discrepancies:</strong> Difficulty reconciling morning opening change with cash sales, expenses, and credit collections.</td>
+      <td><strong>Daily Galla Reconciliation:</strong> Automated real-time cash balancing tool with 30-second day-end physical count verification.</td>
+    </tr>
+    <tr>
+      <td><strong>Morning Recurring Regulars:</strong> 50+ customers take daily milk, bread, or water cans, currently tracked with scratch marks on paper.</td>
+      <td><strong>Morning Regulars "Parcha" Checklist:</strong> 1-tap attendance-style batch recording for daily fixed deliveries.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3. Scope of Work (SOW)</h2>
+
+<h3>3.1. In-Scope Modules</h3>
+<ul>
+  <li><strong>Multi-Tenant Architecture:</strong> Complete data isolation where multiple independent shopkeepers operate with their own customer ledgers, branding, and bank UPI accounts.</li>
+  <li><strong>Voice-to-Sale &amp; Voice-to-Ledger Engine:</strong> Multi-lingual speech-to-intent parsing for instantaneous cash sales and customer purchase entries.</li>
+  <li><strong>Daily Galla (Cash Register) Management:</strong> Opening cash tracking, quick sales, drawer cash expenses, and day-end closing reconciliation.</li>
+  <li><strong>Mobile Voice Soundbox:</strong> Native text-to-speech engine with high-fidelity digital chime for real-time payment announcements.</li>
+  <li><strong>Credit Risk Scoring &amp; Bad-Debt Prevention:</strong> Traffic-light scoring (<span class="badge badge-green">🟢 Good Standing</span>, <span class="badge badge-amber">🟡 Attention Due</span>, <span class="badge badge-red">🔴 High Risk</span>) based on payment velocity and credit limit utilization.</li>
+  <li><strong>AI Paper Chit &amp; Receipt Scanner:</strong> Intelligent line-item extraction from handwritten bills and distributor invoices.</li>
+  <li><strong>Morning Regulars / Subscription Tally:</strong> Batch logging for daily milk, water cans, and bread routines.</li>
+  <li><strong>Omni-Channel Customer Communication:</strong> Dynamic WhatsApp payment reminders and automated Email fallback for customer onboarding and digital receipts.</li>
+  <li><strong>Printable Counter QR Standee:</strong> High-resolution printable counter poster generator with shop branding and UPI QR code.</li>
+</ul>
+
+<h3>3.2. Out-of-Scope (Deliberate Design Boundaries)</h3>
+<ul>
+  <li>Complex warehouse batching / barcode logistics (Unnecessary overhead for local retail counters).</li>
+  <li>Third-party delivery fleet integrations (Local neighborhood shops cater to counter and walk-in trade).</li>
+</ul>
+
+<h2>4. Functional Module Specifications</h2>
+
+<h3>Module 1: Multi-Tenant Direct UPI Settlement</h3>
+<ul>
+  <li><strong>Shop Profile VPA Binding:</strong> During onboarding, each shopkeeper sets their unique UPI ID (e.g., <code>sharma@okhdfcbank</code>, <code>9876543210@paytm</code>).</li>
+  <li><strong>Dynamic Customer Linkage:</strong> Customers belonging to Shop A pay Shop A; customers of Shop B pay Shop B.</li>
+  <li><strong>Zero Commission:</strong> Direct peer-to-merchant NPCI UPI rails with 0% intermediary deductions.</li>
+</ul>
+
+<h3>Module 2: Daily Galla (Cash Register Balancing)</h3>
+<ul>
+  <li><strong>Real-time Cash Formula:</strong> <code>Opening Cash + Quick Cash Sales + Udhaar Cash Collected - Drawer Expenses = Expected Cash</code>.</li>
+  <li><strong>Day-End Closing:</strong> The shopkeeper enters physical cash counted in the drawer at closing. The engine calculates variance (<code>Balanced Perfectly ✅</code>, <code>Short ⚠️</code>, or <code>Excess 💰</code>) and archives daily records.</li>
+</ul>
+
+<h3>Module 3: Voice-Activated POS Assistant</h3>
+<ul>
+  <li><strong>Natural Language Parser:</strong> Spoken voice commands instantly log transactions without keyboard typing.</li>
+</ul>
+
+<h3>Module 4: Customer Credit Risk &amp; Bad-Debt Shield</h3>
+<ul>
+  <li>Prevents over-leveraging customers and triggers visual alerts on overdue balances before extending new credit.</li>
+</ul>
+
+<h3>Module 5: Morning Regulars ("Parcha" Subscription Tally)</h3>
+<ul>
+  <li>Enables merchants to configure regular daily customers and batch log 20+ customer deliveries in 5 seconds.</li>
+</ul>
+
+<h2>5. User Roles &amp; Access Control Matrix (RBAC)</h2>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>User Role</th>
+      <th>Functional Access &amp; Privileges</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>System Admin</strong></td>
+      <td>Platform monitoring, shop owner onboarding, tenant activation/deactivation, gross platform telemetry.</td>
+    </tr>
+    <tr>
+      <td><strong>Shop Owner (Merchant)</strong></td>
+      <td>Full store administration, customer ledger control, voice sales, cash register, regulars, reports, and QR standee.</td>
+    </tr>
+    <tr>
+      <td><strong>Customer</strong></td>
+      <td>Read-only access to self-service digital passbook, itemized receipt breakdown, and 1-tap UPI payment settlement.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>6. Technology Stack &amp; Architecture</h2>
+<div class="callout-box-blue">
+  <ul>
+    <li><strong>Frontend Client:</strong> React Native / Expo (SDK 57) with NativeWind (TailwindCSS), responsive across Web, Android, and iOS.</li>
+    <li><strong>Backend API Server:</strong> Node.js, Express 5.x RESTful API architecture.</li>
+    <li><strong>Database:</strong> MongoDB with Mongoose ODM (Multi-tenant indexing &amp; schema validations).</li>
+    <li><strong>Speech &amp; Audio:</strong> Web SpeechRecognition, Web Audio API synthesizers &amp; native Text-to-Speech engines.</li>
+    <li><strong>Communications:</strong> Nodemailer SMTP mail engine &amp; dynamic WhatsApp deep-links.</li>
+  </ul>
+</div>
+
+<h2>7. Business Benefits &amp; Expected Return on Investment (ROI)</h2>
+<ol>
+  <li><strong>Immediate Cost Savings:</strong> Saves ₹1,200–₹1,800/year per store on hardware voice soundbox rentals.</li>
+  <li><strong>Zero Gateway Fees:</strong> Saves 2% on all digital collections by leveraging direct UPI rails.</li>
+  <li><strong>Faster Debt Recovery:</strong> Deep-linked UPI payment reminders sent via WhatsApp and Email accelerate overdue collections by 35–50%.</li>
+  <li><strong>High Merchant Retention:</strong> 30-second daily cash balancing and 1-tap morning milk tallies make the app an indispensable daily operating tool.</li>
+</ol>
+
+<h2>8. Executive Sign-Off &amp; Project Authorization</h2>
+<table class="sign-table">
+  <tr>
+    <td>
+      <strong>Submitted By:</strong><br><br>
+      <strong>Name:</strong> Project Lead &amp; Technical Team<br>
+      <strong>Title:</strong> Full-Stack Solutions Architect<br>
+      <strong>Date:</strong> ___________________________<br><br>
+      <strong>Signature:</strong> _______________________
+    </td>
+    <td>
+      <strong>Approved &amp; Accepted By:</strong><br><br>
+      <strong>Name:</strong> ___________________________<br>
+      <strong>Title:</strong> Executive Director / Management Reviewer<br>
+      <strong>Date:</strong> ___________________________<br><br>
+      <strong>Signature:</strong> _______________________
+    </td>
+  </tr>
+</table>
+
+<div class="footer">
+  <strong>CONFIDENTIAL &amp; PROPRIETARY</strong> • Prepared for Corporate Management &amp; Product Stakeholders
+</div>
+
+</body>
+</html>
