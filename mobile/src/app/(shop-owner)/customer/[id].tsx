@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Linking,
   Platform,
   Text,
@@ -132,11 +133,12 @@ export default function CustomerAccountScreen() {
   const paymentValue = Number(payAmount) || 0;
   const balanceAfterPayment = Math.round((previousBalance - paymentValue) * 100) / 100;
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = async () => {
     if (!customer) return;
-    printCustomerStatementPdf({
+    try {
+    await printCustomerStatementPdf({
       shop: {
-        name: shop?.name || 'FreshMart Grocery',
+        name: shop?.name || 'Digimart',
         phone: shop?.phone || '+91 63795 17503',
         address: shop?.address || '',
         upiId: shop?.upiId || '',
@@ -169,6 +171,9 @@ export default function CustomerAccountScreen() {
         paymentMethod: row.paymentMethod,
       })),
     });
+    } catch (err: any) {
+      Alert.alert('Download failed', err.message || 'Could not download the PDF');
+    }
   };
 
   const addItem = async (bypassRiskWarning = false) => {
@@ -276,7 +281,7 @@ export default function CustomerAccountScreen() {
   // Share Statement & UPI Link via WhatsApp or Email
   const shareStatement = async () => {
     if (!customer || !id) return;
-    const shopName = shop?.name || 'FreshMart Grocery';
+    const shopName = shop?.name || 'Digimart';
     const upiId = shop?.upiId || '';
     const senderContact = shop?.phone || '+91 63795 17503';
     const upiLink = upiId

@@ -29,7 +29,7 @@ export const registerForPushNotificationsAsync = async (): Promise<string | null
   try {
     if (Platform.OS === 'android') {
       await Notifications.setNotificationChannelAsync('freshmart_updates', {
-        name: 'FreshMart Account & Bill Updates',
+        name: 'Digimart Account & Bill Updates',
         importance: Notifications.AndroidImportance.MAX,
         vibrationPattern: [0, 250, 250, 250],
         lightColor: '#059669',

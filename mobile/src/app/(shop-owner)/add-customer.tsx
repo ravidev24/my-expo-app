@@ -27,24 +27,28 @@ export default function AddCustomerScreen() {
   const { t } = useI18n();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [created, setCreated] = useState<{ name: string; phone: string; id?: string } | null>(null);
+  const [created, setCreated] = useState<{ name: string; phone: string; email: string; emailed: boolean; id?: string } | null>(null);
+
+  const emailOk = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
   const pickContact = async () => {
     setError(null);
     if (Platform.OS === 'web') {
-      const contactsApi = (navigator as Navigator & { contacts?: { select: (props: string[], opts: { multiple: boolean }) => Promise<Array<{ name?: string[]; tel?: string[] }>> } }).contacts;
+      const contactsApi = (navigator as Navigator & { contacts?: { select: (props: string[], opts: { multiple: boolean }) => Promise<Array<{ name?: string[]; tel?: string[]; email?: string[] }>> } }).contacts;
       if (!contactsApi?.select) {
         setError(t.contactsUnsupported);
         return;
       }
       try {
-        const picked = await contactsApi.select(['name', 'tel'], { multiple: false });
+        const picked = await contactsApi.select(['name', 'tel', 'email'], { multiple: false });
         const person = picked?.[0];
         if (!person) return;
         if (person.name?.[0]) setName(person.name[0]);
         if (person.tel?.[0]) setPhone(person.tel[0]);
+        if (person.email?.[0]) setEmail(person.email[0]);
       } catch {
         setError(t.contactsDenied);
       }
@@ -63,14 +67,16 @@ export default function AddCustomerScreen() {
       if (pickedName) setName(pickedName);
       const tel = person.phoneNumbers?.[0]?.number;
       if (tel) setPhone(tel);
+      const mail = person.emails?.[0]?.email;
+      if (mail) setEmail(mail);
     } catch {
       setError(t.contactsUnsupported);
     }
   };
 
   const handleAdd = async () => {
-    if (!name.trim() || digitsOnly(phone).length < 10) {
-      setError(t.phoneRequired);
+    if (!name.trim() || digitsOnly(phone).length < 10 || !emailOk(email)) {
+      setError(t.emailRequired);
       setCreated(null);
       return;
     }
@@ -81,14 +87,18 @@ export default function AddCustomerScreen() {
       const res = await customerApi.create({
         name: name.trim(),
         phone: digitsOnly(phone),
+        email: email.trim().toLowerCase(),
       });
       setCreated({
         name: res.customer?.name || name.trim(),
         phone: res.customer?.phone || digitsOnly(phone),
+        email: email.trim().toLowerCase(),
+        emailed: Boolean(res.emailSent),
         id: res.customer?._id,
       });
       setName('');
       setPhone('');
+      setEmail('');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Could not add customer');
     } finally {
@@ -98,7 +108,7 @@ export default function AddCustomerScreen() {
 
   const upiMessage = () => {
     if (!created) return '';
-    const shopName = shop?.name || 'FreshMart';
+    const shopName = shop?.name || 'Digimart';
     const upiId = shop?.upiId || '';
     const payLink = upiId
       ? `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(shopName)}&cu=INR`
@@ -155,6 +165,17 @@ export default function AddCustomerScreen() {
           placeholder="9876543210"
           placeholderTextColor="#94a3b8"
           keyboardType="phone-pad"
+          className="bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/15 rounded-xl text-slate-900 dark:text-white px-4 h-12 mb-3"
+        />
+
+        <Text className="text-slate-600 dark:text-slate-300 text-xs font-bold mb-1">{t.email}</Text>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          placeholder="name@email.com"
+          placeholderTextColor="#94a3b8"
+          autoCapitalize="none"
+          keyboardType="email-address"
           className="bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/15 rounded-xl text-slate-900 dark:text-white px-4 h-12 mb-4"
         />
 
@@ -172,16 +193,13 @@ export default function AddCustomerScreen() {
           <View className="mt-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
             <Text className="text-emerald-800 dark:text-emerald-200 font-black text-sm">{t.added}</Text>
             <Text className="text-slate-700 dark:text-slate-300 text-xs mt-1">{created.name} · {created.phone}</Text>
-            <View className="flex-row gap-2 mt-3">
-              <TouchableOpacity onPress={() => share('whatsapp')} className="flex-1 bg-emerald-600 py-2.5 rounded-xl flex-row items-center justify-center gap-1">
-                <Ionicons name="logo-whatsapp" size={15} color="#fff" />
-                <Text className="text-white font-bold text-xs">{t.sendWhatsapp}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => share('sms')} className="flex-1 bg-slate-800 py-2.5 rounded-xl flex-row items-center justify-center gap-1">
-                <Ionicons name="chatbubble-outline" size={15} color="#fff" />
-                <Text className="text-white font-bold text-xs">{t.sendSms}</Text>
-              </TouchableOpacity>
-            </View>
+            <Text className="text-slate-700 dark:text-slate-300 text-xs mt-1">
+              {created.emailed ? t.passwordEmailed : created.email}
+            </Text>
+            <TouchableOpacity onPress={() => share('whatsapp')} className="mt-3 bg-emerald-600 py-2.5 rounded-xl flex-row items-center justify-center gap-1">
+              <Ionicons name="logo-whatsapp" size={15} color="#fff" />
+              <Text className="text-white font-bold text-xs">{t.sendWhatsapp}</Text>
+            </TouchableOpacity>
           </View>
         )}
       </View>

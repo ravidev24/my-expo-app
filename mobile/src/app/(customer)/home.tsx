@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Linking,
   Platform,
@@ -82,8 +83,8 @@ export default function CustomerHomeScreen() {
   const { colorScheme } = useColorScheme();
   const icon = colorScheme === 'light' ? '#334155' : '#e2e8f0';
 
-  const shopName = shop?.name || 'FreshMart Grocery';
-  const upiId = shop?.upiId || 'freshmart@okaxis';
+  const shopName = shop?.name || 'Digimart';
+  const upiId = shop?.upiId || 'shop@upi';
 
   // Dynamic amount calculation
   const parsedPayAmount = Number(customPayAmount);
@@ -125,10 +126,11 @@ export default function CustomerHomeScreen() {
     }
   };
 
-  const handleDownloadStatementPdf = () => {
-    printCustomerStatementPdf({
+  const handleDownloadStatementPdf = async () => {
+    try {
+    await printCustomerStatementPdf({
       shop: {
-        name: shop?.name || 'FreshMart Grocery',
+        name: shop?.name || 'Digimart',
         phone: shop?.phone || '+91 63795 17503',
         address: shop?.address || '',
         upiId: shop?.upiId || '',
@@ -160,6 +162,9 @@ export default function CustomerHomeScreen() {
         paymentMethod: row.paymentMethod,
       })),
     });
+    } catch (err: any) {
+      Alert.alert('Download failed', err.message || 'Could not download the PDF');
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
+import * as Speech from 'expo-speech';
 
 const STORAGE_KEY_ENABLED = 'grocery_soundbox_enabled';
 const STORAGE_KEY_LANG = 'grocery_soundbox_lang';
@@ -75,7 +76,7 @@ export const playSoundboxChime = () => {
   }
 };
 
-// Speak text using SpeechSynthesis
+// Speak text using the browser on web, and the phone speaker in the Android app.
 export const speakAnnouncement = (text: string) => {
   if (!soundboxEnabled) return;
 
@@ -83,29 +84,31 @@ export const speakAnnouncement = (text: string) => {
 
   if (Platform.OS === 'web' && typeof window !== 'undefined' && 'speechSynthesis' in window) {
     try {
-      // Delay speech slightly to let the chime ring
       setTimeout(() => {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.rate = 0.95;
         utterance.pitch = 1.05;
         utterance.lang = soundboxLanguage;
-
-        // Try to pick a natural regional voice if available
         const voices = window.speechSynthesis.getVoices();
         const matchedVoice = voices.find(
           (v) => v.lang.includes(soundboxLanguage) || v.lang.includes('en-IN') || v.lang.includes('hi-IN')
         );
-        if (matchedVoice) {
-          utterance.voice = matchedVoice;
-        }
-
+        if (matchedVoice) utterance.voice = matchedVoice;
         window.speechSynthesis.speak(utterance);
       }, 350);
     } catch (err) {
       console.warn('[Soundbox TTS Error]:', err);
     }
+    return;
   }
+
+  Speech.stop();
+  Speech.speak(text, {
+    language: soundboxLanguage || 'en-IN',
+    rate: 0.95,
+    pitch: 1.05,
+  });
 };
 
 // Specific Audio Trigger Helpers
@@ -130,7 +133,7 @@ export const soundbox = {
   },
 
   testVoice: () => {
-    speakAnnouncement('FreshMart Soundbox active. All payments will be announced aloud.');
+    speakAnnouncement('Digimart Soundbox active. All payments will be announced aloud.');
   },
 
   speakAnnouncement: (text: string) => {

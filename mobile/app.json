@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Digimart",
+    "slug": "my-expo-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,7 +13,7 @@
     "android": {
       "package": "com.ravidev24.freshmart",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#047857",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -29,17 +29,20 @@
       [
         "expo-contacts",
         {
-          "contactsPermission": "Allow FreshMart to access your contacts so you can add a customer."
+          "contactsPermission": "Allow Digimart to access your contacts so you can add a customer."
         }
       ],
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#047857",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker",
+      "expo-sharing",
+      "expo-speech-recognition"
     ],
     "experiments": {
       "typedRoutes": false,

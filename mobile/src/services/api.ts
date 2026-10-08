@@ -149,7 +149,7 @@ export const customerApi = {
   create: (data: {
     name: string;
     phone: string;
-    email?: string;
+    email: string;
     address?: string;
     creditLimit?: number;
     notes?: string;
@@ -295,6 +295,61 @@ export const regularApi = {
   batchRecord: (itemIds: string[], date?: string) =>
     request('/regulars/batch-record', { method: 'POST', body: JSON.stringify({ itemIds, date }) }),
 };
+
+function bytesToBase64(buffer: ArrayBuffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+export async function downloadPdf(endpoint: string, body: object, filename: string) {
+  const token = await getStoredAuthToken();
+  const url = `${getApiBaseUrl()}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/pdf',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    let message = 'Could not download the PDF';
+    try {
+      const data = await res.json();
+      message = data.message || message;
+    } catch {}
+    throw new Error(message);
+  }
+
+  if (Platform.OS === 'web') {
+    const blob = await res.blob();
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(href);
+    return;
+  }
+
+  const FileSystem = await import('expo-file-system/legacy');
+  const Sharing = await import('expo-sharing');
+  const base64 = bytesToBase64(await res.arrayBuffer());
+  const path = `${FileSystem.cacheDirectory}${filename}`;
+  await FileSystem.writeAsStringAsync(path, base64, { encoding: FileSystem.EncodingType.Base64 });
+  if (await Sharing.isAvailableAsync()) {
+    await Sharing.shareAsync(path, { mimeType: 'application/pdf', dialogTitle: filename, UTI: 'com.adobe.pdf' });
+  }
+}
 
 export const ocrApi = {
   parseBill: (data: { rawText?: string; sampleType?: string }) =>

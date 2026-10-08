@@ -215,7 +215,7 @@ export default function ProfileScreen() {
                 🏪 Associated Shop
               </Text>
               <Text className="text-emerald-800 dark:text-emerald-300 font-black text-xs">
-                {shop?.name || 'FreshMart Grocery'}
+                {shop?.name || 'Digimart'}
               </Text>
             </View>
             {customerProfile && (
@@ -382,7 +382,7 @@ export default function ProfileScreen() {
               <TextInput
                 value={shopName}
                 onChangeText={setShopName}
-                placeholder="e.g. Sharma Groceries / FreshMart"
+                placeholder="e.g. Sharma Groceries"
                 placeholderTextColor="#94a3b8"
                 className="bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/15 rounded-xl px-4 h-12 text-slate-900 dark:text-white mb-3 text-sm font-semibold"
               />

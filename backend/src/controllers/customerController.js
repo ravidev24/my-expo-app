@@ -4,7 +4,7 @@ const Shop = require('../models/Shop');
 const CustomerProfile = require('../models/CustomerProfile');
 const Purchase = require('../models/Purchase');
 const Payment = require('../models/Payment');
-const { sendPasswordSetupEmail } = require('../config/mailer');
+const { sendPasswordSetupEmail, sendLoginPasswordEmail } = require('../config/mailer');
 const { generatePassword } = require('../utils/password');
 const { recalculateCustomerBalance } = require('../utils/balanceCalculator');
 
@@ -25,11 +25,12 @@ const createCustomer = async (req, res, next) => {
     const { name, email, phone, address, creditLimit, notes, shopId: reqShopId } = req.body;
     const digits = String(phone || '').replace(/\D/g, '');
     const realEmail = email ? String(email).trim().toLowerCase() : '';
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(realEmail);
 
-    if (!name || digits.length < 10) {
+    if (!name || digits.length < 10 || !emailOk) {
       return res.status(400).json({
         success: false,
-        message: 'Customer name and a valid phone number are required.',
+        message: 'Customer name, a valid phone number, and a valid email are required.',
       });
     }
 
@@ -41,7 +42,7 @@ const createCustomer = async (req, res, next) => {
       });
     }
 
-    const storedEmail = realEmail || `${digits}.${shopId}@phone.local`;
+    const storedEmail = realEmail;
 
     const existingProfile = await CustomerProfile.findOne({
       shopId,
@@ -51,7 +52,7 @@ const createCustomer = async (req, res, next) => {
     if (existingProfile) {
       return res.status(400).json({
         success: false,
-        message: 'A customer with this phone number already exists in your shop.',
+        message: 'A customer with this phone number or email already exists in your shop.',
       });
     }
 
@@ -59,7 +60,7 @@ const createCustomer = async (req, res, next) => {
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: 'A customer with this phone number already exists.',
+        message: 'A customer with this email already exists.',
       });
     }
 
@@ -86,11 +87,22 @@ const createCustomer = async (req, res, next) => {
       status: 'active',
     });
 
+    const mailResult = await sendLoginPasswordEmail({
+      to: user.email,
+      name: user.name,
+      password,
+      role: 'Customer',
+    });
+
     res.status(201).json({
       success: true,
-      message: 'Customer added successfully.',
+      message:
+        mailResult.mode === 'smtp'
+          ? 'Customer added. Login password emailed.'
+          : 'Customer added. Email is not configured, so the password was not sent.',
       customer: profile,
-      emailSent: false,
+      emailSent: mailResult.mode === 'smtp',
+      temporaryPassword: mailResult.mode === 'smtp' ? undefined : password,
     });
   } catch (err) {
     next(err);

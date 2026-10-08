@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getLast30DaysInput, getMonthStartInput, todayInput } from '../lib/format';
 import { card } from '../lib/ui';
+import { DateField } from './date-field';
 
 interface DateRangeFilterProps {
   startDate: string;
@@ -144,30 +145,17 @@ export function DateRangeFilter({
       </View>
 
       {/* Custom Date Inputs (when expanded or custom) */}
-      {(showCustomInputs || isCustom) && (
-        <View className="flex-row gap-2 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 items-center">
+      <View className="flex-row gap-2 mt-2 pt-2 border-t border-slate-100 dark:border-white/5 items-center">
           <View className="flex-1">
             <Text className="text-slate-500 text-[10px] font-bold uppercase mb-1">From Date</Text>
-            <TextInput
-              value={startDate}
-              onChangeText={(text) => onRangeChange(text, endDate)}
-              placeholder="YYYY-MM-DD"
-              placeholderTextColor="#94a3b8"
-              className="bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/15 rounded-xl px-2.5 h-10 text-xs font-bold text-slate-900 dark:text-white"
-            />
+            <DateField compact value={startDate} onChange={(next) => onRangeChange(next, endDate)} />
           </View>
 
           <Text className="text-slate-400 font-black text-xs self-end mb-2">→</Text>
 
           <View className="flex-1">
             <Text className="text-slate-500 text-[10px] font-bold uppercase mb-1">To Date</Text>
-            <TextInput
-              value={endDate}
-              onChangeText={(text) => onRangeChange(startDate, text)}
-              placeholder="YYYY-MM-DD"
-              placeholderTextColor="#94a3b8"
-              className="bg-white dark:bg-slate-950/70 border border-slate-200 dark:border-white/15 rounded-xl px-2.5 h-10 text-xs font-bold text-slate-900 dark:text-white"
-            />
+            <DateField compact value={endDate} onChange={(next) => onRangeChange(startDate, next)} />
           </View>
 
           {(startDate || endDate) && (
@@ -179,7 +167,6 @@ export function DateRangeFilter({
             </TouchableOpacity>
           )}
         </View>
-      )}
     </View>
   );
 }

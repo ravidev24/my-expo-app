@@ -63,7 +63,7 @@ export default function LoginScreen() {
             <View className="items-center mb-2">
               <Ionicons name="leaf" size={28} color="#059669" />
             </View>
-            <Text className={`text-3xl font-extrabold text-center ${heading}`}>FreshMart Pro</Text>
+            <Text className={`text-3xl font-extrabold text-center ${heading}`}>Digimart</Text>
             <Text className={`${body} text-center mt-2 mb-6`}>Sign in to your account</Text>
             {errorMessage && <Text className="text-red-700 dark:text-red-200 bg-red-500/15 rounded-xl p-3 mb-3">{errorMessage}</Text>}
             <Text className={label}>EMAIL</Text>

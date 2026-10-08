@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   ScrollView,
   Text,
   TextInput,
@@ -197,10 +198,11 @@ export default function DailyGallaScreen() {
     }
   };
 
-  const handleDownloadPdf = () => {
-    printGallaReportPdf({
+  const handleDownloadPdf = async () => {
+    try {
+    await printGallaReportPdf({
       shop: {
-        name: 'FreshMart Grocery',
+        name: 'Digimart',
         phone: '+91 63795 17503',
         currency: '₹',
       },
@@ -215,6 +217,9 @@ export default function DailyGallaScreen() {
       difference: summary?.difference,
       status: summary?.status,
     });
+    } catch (err: any) {
+      Alert.alert('Download failed', err.message || 'Could not download the PDF');
+    }
   };
 
   const loadHistory = async () => {

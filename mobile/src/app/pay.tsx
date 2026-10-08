@@ -25,7 +25,7 @@ export default function PublicPayScreen() {
   }>();
 
   const upiId = params.pa || 'ravim66835-2@okhdfcbank';
-  const shopName = params.pn || 'FreshMart Grocery';
+  const shopName = params.pn || 'Digimart';
   const totalDueAmount = Number(params.am) || 0;
   const currency = params.cu || 'INR';
 

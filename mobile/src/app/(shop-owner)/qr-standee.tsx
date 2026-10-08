@@ -19,8 +19,8 @@ import { body, card, heading, subtle } from '../../lib/ui';
 export default function QrStandeeScreen() {
   const router = useRouter();
   const { user } = useAuth();
-  const [shopName, setShopName] = useState('FreshMart Grocery');
-  const [upiId, setUpiId] = useState('freshmart@okaxis');
+  const [shopName, setShopName] = useState('Digimart');
+  const [upiId, setUpiId] = useState('shop@upi');
   const [phone, setPhone] = useState('+91 98765 43210');
   const [tagline, setTagline] = useState('Scan to Pay or Check Outstanding Balance');
   const [showSettings, setShowSettings] = useState(false);
@@ -32,8 +32,8 @@ export default function QrStandeeScreen() {
       try {
         const res = await dashboardApi.getShopStats();
         if (res.success && res.shop) {
-          setShopName(res.shop.name || 'FreshMart Grocery');
-          setUpiId(res.shop.upiId || 'freshmart@okaxis');
+          setShopName(res.shop.name || 'Digimart');
+          setUpiId(res.shop.upiId || 'shop@upi');
           setPhone(res.shop.phone || '+91 98765 43210');
           setTagline(res.shop.tagline || 'Scan to Pay or Check Outstanding Balance');
         }
@@ -119,7 +119,7 @@ export default function QrStandeeScreen() {
           <TextInput
             value={upiId}
             onChangeText={setUpiId}
-            placeholder="e.g. freshmart@oksbi"
+            placeholder="e.g. shop@upi"
             placeholderTextColor="#94a3b8"
             className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/15 rounded-xl px-3 h-10 text-slate-900 dark:text-white mb-2 font-bold text-emerald-600"
           />

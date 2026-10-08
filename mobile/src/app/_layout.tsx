@@ -48,7 +48,7 @@ export default function RootLayout() {
       <ThemeBoot />
       {Platform.OS === 'web' && (
         <Head>
-          <title>FreshMart Grocery Pro - Expense & Ledger Management</title>
+          <title>Digimart - Shop Ledger</title>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link

@@ -28,7 +28,7 @@ export default function IndexScreen() {
 
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-slate-900 dark:text-white text-2xl font-extrabold mb-4">FreshMart</Text>
+      <Text className="text-slate-900 dark:text-white text-2xl font-extrabold mb-4">Digimart</Text>
       <ActivityIndicator size="large" color="#ffffff" />
     </View>
   );

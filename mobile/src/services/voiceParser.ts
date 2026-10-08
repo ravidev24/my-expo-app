@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { ExpoSpeechRecognitionModule } from 'expo-speech-recognition';
 
 export type ParsedVoiceIntent =
   | {
@@ -135,9 +136,11 @@ export const parseVoiceCommand = (transcript: string): ParsedVoiceIntent => {
 // Web Speech Recognition Controller
 export class SpeechListener {
   private recognition: any = null;
+  private nativeSubs: { remove: () => void }[] = [];
   public isListening: boolean = false;
   private onResultCb?: (text: string, isFinal: boolean) => void;
   private onErrorCb?: (err: any) => void;
+  private readonly native = Platform.OS !== 'web';
 
   constructor() {
     if (Platform.OS === 'web' && typeof window !== 'undefined') {
@@ -177,12 +180,34 @@ export class SpeechListener {
   }
 
   public isSupported(): boolean {
-    return Boolean(this.recognition);
+    return this.native || Boolean(this.recognition);
   }
 
-  public start(onResult: (text: string, isFinal: boolean) => void, onError?: (err: any) => void) {
+  public async start(onResult: (text: string, isFinal: boolean) => void, onError?: (err: any) => void) {
     this.onResultCb = onResult;
     this.onErrorCb = onError;
+    if (this.native) {
+      const permission = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
+      if (!permission.granted) {
+        this.isListening = false;
+        onError?.('not-allowed');
+        return;
+      }
+      this.nativeSubs.forEach((sub) => sub.remove());
+      this.nativeSubs = [
+        ExpoSpeechRecognitionModule.addListener('result', (event) => {
+          const text = event.results?.[0]?.transcript || '';
+          if (text) onResult(text, event.isFinal);
+        }),
+        ExpoSpeechRecognitionModule.addListener('error', (event) => {
+          this.isListening = false;
+          onError?.(event.error);
+        }),
+      ];
+      ExpoSpeechRecognitionModule.start({ lang: 'en-IN', interimResults: true, continuous: false });
+      this.isListening = true;
+      return;
+    }
     if (this.recognition && !this.isListening) {
       try {
         this.recognition.start();
@@ -194,6 +219,13 @@ export class SpeechListener {
   }
 
   public stop() {
+    if (this.native) {
+      try {
+        ExpoSpeechRecognitionModule.stop();
+      } catch {}
+      this.isListening = false;
+      return;
+    }
     if (this.recognition && this.isListening) {
       try {
         this.recognition.stop();

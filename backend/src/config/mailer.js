@@ -78,11 +78,11 @@ const sendLoginPasswordEmail = async ({ to, name, password, role }) => {
   const transporter = createTransporter();
   const loginUrl = process.env.FRONTEND_URL || 'http://localhost:8081';
 
-  const subject = 'Your FreshMart account password';
+  const subject = 'Your Digimart account password';
   const textContent = `Hello ${name},\n\nAn account was created for you as ${roleLabel}.\n\nEmail: ${to}\nPassword: ${password}\n\nSign in at ${loginUrl}/login\n\nPlease keep this password private.`;
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-      <h2 style="color: #059669;">Your FreshMart account</h2>
+      <h2 style="color: #059669;">Your Digimart account</h2>
       <p>Hello <strong>${name}</strong>,</p>
       <p>An account was created for you as <strong>${roleLabel}</strong>.</p>
       <p>Email: <strong>${to}</strong><br/>Password: <strong>${password}</strong></p>
@@ -93,7 +93,7 @@ const sendLoginPasswordEmail = async ({ to, name, password, role }) => {
   if (transporter) {
     try {
       const info = await transporter.sendMail({
-        from: process.env.EMAIL_FROM || '"FreshMart Grocery" <noreply@freshmart.com>',
+        from: process.env.EMAIL_FROM || '"Digimart" <noreply@digimart.com>',
         to,
         subject,
         text: textContent,

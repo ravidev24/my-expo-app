@@ -17,6 +17,7 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const gallaRoutes = require('./routes/gallaRoutes');
 const regularRoutes = require('./routes/regularRoutes');
 const ocrRoutes = require('./routes/ocrRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -50,6 +51,7 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/galla', gallaRoutes);
 app.use('/api/regulars', regularRoutes);
 app.use('/api/ocr', ocrRoutes);
+app.use('/api/reports', reportRoutes);
 
 // 404 Handler for undefined API routes
 app.use((req, res, next) => {

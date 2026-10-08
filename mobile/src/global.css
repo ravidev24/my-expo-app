@@ -36,6 +36,12 @@ html.dark .fm-date {
   color: #f8fafc;
 }
 
+.fm-date-compact {
+  height: 40px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 :root {
   --font-display:
     Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,

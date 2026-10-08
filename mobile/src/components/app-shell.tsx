@@ -97,7 +97,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <TouchableOpacity onPress={() => router.replace(homeForRole(user?.role) as never)} className="flex-row items-center gap-2">
               <Ionicons name="leaf" size={22} color="#059669" />
               <View>
-                <Text className={`text-lg font-extrabold ${heading}`}>FreshMart</Text>
+                <Text className={`text-lg font-extrabold ${heading}`}>Digimart</Text>
                 <Text className="text-emerald-600 dark:text-emerald-300 text-xs">{roleLabel(user?.role)}</Text>
               </View>
             </TouchableOpacity>
